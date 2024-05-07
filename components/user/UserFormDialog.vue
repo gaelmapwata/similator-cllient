@@ -64,6 +64,7 @@ const initialValues = computed(() => {
 
 const fields = computed(() => [
   { name: 'email', placeholder: 'Veuillez entre l\' email', label: 'Email', type: 'text' },
+  { name: 'password', placeholder: 'Veuillez entre le mots de passe', label: 'Mots de passe', type: 'text' },
   {
     name: 'roles',
     placeholder: 'Veuillez sélectionner les roles',

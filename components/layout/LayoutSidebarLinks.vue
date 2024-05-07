@@ -129,6 +129,12 @@ const groupedMenuItems: Array<{
         icon: 'mdi-security',
         to: '/admin/roles',
         permissions: ['ROLE:ADD']
+      },
+      {
+        text: 'Pénalités',
+        icon: 'mdi-format-float-left',
+        to: '/admin/penalties',
+        permissions: ['PENALTY:ADD']
       }
     ]
   }

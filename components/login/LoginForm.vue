@@ -1,6 +1,6 @@
 <template>
   <div class="login-form-container">
-    <h1>UBA-RDC E-TAX APP</h1>
+    <h1>Similateur Pénalité</h1>
     <h2 class="text-primary">
       AUTHENTIFICATION
     </h2>
@@ -58,8 +58,6 @@
       </v-btn>
     </Form>
   </div>
-
-  <LoginOtpDialog v-model="showOtpForm" :email="email" />
 </template>
 
 <script lang="ts" setup>
@@ -74,13 +72,13 @@ interface FormValueI {
 }
 
 const authStore = useAuthStore()
+const { signIn } = useAuth()
 const snackbarStore = useSnackbarStore()
 
 const passwordVisible = ref(false)
 const loading = ref(false)
-const showOtpForm = ref(false)
 const email = ref()
-const { showErrorSnackbar } = snackbarStore
+const { showErrorSnackbar, showSuccessSnackbar } = snackbarStore
 
 const loginSchema = object({
   email: string()
@@ -98,7 +96,13 @@ function onSubmit (values: FormValueI) {
           showErrorSnackbar(error.value.data.msg || 'Identifiants incorrects')
         }
       } else {
-        showOtpForm.value = true
+        signIn({
+          email: values.email,
+          password: values.password
+        }, { callbackUrl: '/admin' })
+          .then(() => {
+            showSuccessSnackbar('Connexion effectuée avec succès')
+          })
       }
     })
 }

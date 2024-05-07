@@ -4,7 +4,7 @@
       v-for="(slideImage, index) in slideImages"
       :key="index"
       :src="slideImage"
-      alt="slide-uba-img"
+      alt="slide-similator-img"
       class="login-slide-img"
       :class="{ active : index === activeSlideIndex}"
     >
@@ -22,7 +22,7 @@
 <script lang="ts" setup>
 import slide1 from '~/assets/images/pic1.jpg'
 import slide2 from '~/assets/images/pic2.jpg'
-import slide3 from '~/assets/images/pic3.jpg'
+import slide3 from '~/assets/images/pic3.webp'
 import slide4 from '~/assets/images/pic4.jpg'
 
 const activeSlideIndex = ref(0)

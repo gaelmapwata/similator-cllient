@@ -44,8 +44,8 @@ export default defineNuxtConfig({
         login: '/login'
       },
       endpoints: {
-        signIn: { path: '/check-otp', method: 'post' },
-        // signOut: { path: '/logout', method: 'post' },
+        signIn: { path: '/signin', method: 'post' },
+        signOut: { path: '/logout', method: 'post' },
         getSession: { path: '/user', method: 'get' }
       },
       token: {
