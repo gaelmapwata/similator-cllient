@@ -66,10 +66,15 @@ const headers = [
   {
     title: 'amount',
     key: 'amount'
-  },
-  {
-    title: 'amount',
-    key: 'amount'
   }
 ]
+function onEditUser () {
+  userFormDialogAction.value = 'update'
+  userFormDialogVisible.value = true
+}
+
+function onAddPenalty () {
+  userFormDialogAction.value = 'create'
+  userFormDialogVisible.value = true
+}
 </script>

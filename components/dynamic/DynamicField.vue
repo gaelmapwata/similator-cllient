@@ -11,6 +11,12 @@
       :hint="hint"
       @update:model-value="emit('update:modelValue', $event)"
     />
+    <DynamicFieldDate
+      v-if="['dateInput'].includes(type)"
+      v-model="field.value"
+      v-bind="props"
+      :field="field"
+    />
     <DynamicFieldSelect
       v-if="['select', 'select-multiple'].includes(type)"
       v-model="field.value"
