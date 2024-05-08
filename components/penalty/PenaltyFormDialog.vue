@@ -19,12 +19,12 @@
 </template>
 
 <script lang="ts" setup>
-import { object, string } from 'yup'
+import { object, string, number } from 'yup'
 import { Form } from 'vee-validate'
 import { useSnackbarStore } from '@/stores/snackbar'
 import { useUserStore } from '@/stores/user'
 import { usePenaltyStore } from '@/stores/penalty'
-import { storeToRefs } from 'pinia'
+// import { storeToRefs } from 'pinia'
 import { PenaltyI } from '~/types/penalty'
 
 const snackbarStore = useSnackbarStore()
@@ -65,13 +65,16 @@ const initialValues = computed(() => {
 const fields = computed(() => [
   { name: 'company', placeholder: 'Veuillez entre l\' entreprise', label: 'Entreprise', type: 'text' },
   { name: 'amount', placeholder: 'Veuillez entre le montant', label: 'Montant', type: 'number' },
-  { name: 'datePenalty', placeholder: 'Veuillez entre la date de la pénalité', label: 'Date penalité', type: 'dateInput' }
+  { name: 'datePenalty', placeholder: 'Veuillez entre la date de la pénalité', label: 'Date penalité', type: 'date' }
 ])
 
 const formSchema = object({
-  email: string()
+  company: string()
     .max(255)
-    .required('Veuillez renseigner l\'entreprise')
+    .required('Veuillez renseigner l\'entreprise'),
+  amount: number()
+    .required('Veuillez renseigner le montant'),
+  datePenalty: string()
 })
 
 async function onSubmit () {
@@ -95,5 +98,5 @@ async function onSubmit () {
   }
 }
 
-// fetchRoles()
+// fetchUsers()
 </script>
