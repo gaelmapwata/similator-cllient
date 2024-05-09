@@ -54,6 +54,9 @@
           <template #[`item.index`]="{ index }">
             {{ (itemsPerPage * (page - 1)) + index + 1 }}
           </template>
+          <template #[`item.amount`]="{ item }">
+            {{ item.amount }}
+          </template>
           <template #[`item.amountHalf`]="{ item }">
             {{ item.amount/2 }}
           </template>
@@ -63,14 +66,128 @@
           <template #[`item.amountSix`]="{ item }">
             {{ item.amount/6 }}
           </template>
-          <template #[`item.amountPercent1`]="{ item }">
-            {{ (item.amount/6)*25/100 }}
-          </template>
           <template #[`item.amountPercent2`]="{ item }">
             {{ (item.amount/6)*50/100 }}
           </template>
-          <template #[`item.amountPercent3`]="{ item }">
-            {{ (item.amount/6)*75/100 }}
+        </v-data-table-server>
+      </template>
+    </v-card>
+    <h5 class="mt-3">
+      Tableau de 75%
+    </h5>
+    <v-card rounded="xl" elevation="0">
+      <template #text>
+        <v-data-table-server
+          v-model="selectedPenalties"
+          v-model:items-per-page="itemsPerPage"
+          v-model:page="page"
+          :items-length="totalItems"
+          :headers="(headers as any)"
+          :items="penalties"
+          :loading="penaltiesLoading"
+          items-per-page-text="Items par page"
+          item-value="id"
+          select-strategy="single"
+          return-object
+          @update:options="loadPenalties"
+        >
+          <template #[`item.index`]="{ index }">
+            {{ (itemsPerPage * (page - 1)) + index + 1 }}
+          </template>
+          <template #[`item.amount`]="{ item }">
+            {{ (item.amount*75/100) }}
+          </template>
+          <template #[`item.amountHalf`]="{ item }">
+            {{ (item.amount*75/100)/2 }}
+          </template>
+          <template #[`item.amountQuarter`]="{ item }">
+            {{ (item.amount*75/100)/4 }}
+          </template>
+          <template #[`item.amountSix`]="{ item }">
+            {{ (item.amount*75/100)/6 }}
+          </template>
+          <template #[`item.amountPercent2`]="{ item }">
+            {{ (item.amount*75/100)*50/100 }}
+          </template>
+        </v-data-table-server>
+      </template>
+    </v-card>
+    <h5 class="mt-3">
+      Tableau de 50%
+    </h5>
+    <v-card rounded="xl" elevation="0">
+      <template #text>
+        <v-data-table-server
+          v-model="selectedPenalties"
+          v-model:items-per-page="itemsPerPage"
+          v-model:page="page"
+          :items-length="totalItems"
+          :headers="(headers as any)"
+          :items="penalties"
+          :loading="penaltiesLoading"
+          items-per-page-text="Items par page"
+          item-value="id"
+          select-strategy="single"
+          return-object
+          @update:options="loadPenalties"
+        >
+          <template #[`item.index`]="{ index }">
+            {{ (itemsPerPage * (page - 1)) + index + 1 }}
+          </template>
+          <template #[`item.amount`]="{ item }">
+            {{ (item.amount*50/100) }}
+          </template>
+          <template #[`item.amountHalf`]="{ item }">
+            {{ (item.amount*50/100)/2 }}
+          </template>
+          <template #[`item.amountQuarter`]="{ item }">
+            {{ (item.amount*50/100)/4 }}
+          </template>
+          <template #[`item.amountSix`]="{ item }">
+            {{ (item.amount*50/100)/6 }}
+          </template>
+          <template #[`item.amountPercent2`]="{ item }">
+            {{ (item.amount*50/100)*50/100 }}
+          </template>
+        </v-data-table-server>
+      </template>
+    </v-card>
+    <h5 class="mt-3">
+      Tableau de 25%
+    </h5>
+    <v-card rounded="xl" elevation="0">
+      <template #text>
+        <v-data-table-server
+          v-model="selectedPenalties"
+          v-model:items-per-page="itemsPerPage"
+          v-model:page="page"
+          :items-length="totalItems"
+          :headers="(headers as any)"
+          :items="penalties"
+          :loading="penaltiesLoading"
+          items-per-page-text="Items par page"
+          item-value="id"
+          select-strategy="single"
+          return-object
+          @update:options="loadPenalties"
+        >
+          <template #[`item.index`]="{ index }">
+            {{ (itemsPerPage * (page - 1)) + index + 1 }}
+          </template>
+          <template #[`item.amount`]="{ item }">
+            {{ (item.amount*25/100) }}
+          </template>
+          <template #[`item.amountHalf`]="{ item }">
+            {{ (item.amount*25/100)/2 }}
+          </template>
+          <template #[`item.amountQuarter`]="{ item }">
+            {{ (item.amount*25/100)/4 }}
+          </template>
+          <template #[`item.amountSix`]="{ item }">
+            {{ (item.amount*25/100)/6 }}
+          </template>
+          <template #[`item.amountPercent2`]="{ item }">
+            {{ (item.amount*25/100)*50/100 }}
           </template>
         </v-data-table-server>
       </template>
@@ -156,16 +273,8 @@ const headers = [
     key: 'amountSix'
   },
   {
-    title: 'amount/25%',
-    key: 'amountPercent1'
-  },
-  {
     title: 'amount/50%',
     key: 'amountPercent2'
-  },
-  {
-    title: 'amount/75%',
-    key: 'amountPercent3'
   },
   {
     title: 'Date enregistrement',
