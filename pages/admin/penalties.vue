@@ -1,6 +1,14 @@
 <template>
   <div class="page-container">
-    <div class="d-flex mb-4 justify-end">
+    <v-card rounded="xl" elevation="0" style="overflow: visible; position: relative; z-index: 2;">
+      <v-card-text>
+        <PenaltyFilter
+          v-model="filter"
+          @filter="handleFilter()"
+        />
+      </v-card-text>
+    </v-card>
+    <div class="d-flex mt-3 mb-4 justify-end">
       <v-btn
         v-if="userHasOneOfPermissions(['PENALTY:ADD'])"
         prepend-icon="mdi-plus"
@@ -33,6 +41,22 @@
       >
         <span class="text-none">Supprimer</span>
       </v-btn>
+      <a
+        v-if="userHasOneOfPermissions([ 'PENALTY:EXPORT'])"
+        target="_blank"
+        @click="handleExportPenalties()"
+      >
+        <v-btn
+          class="text-none"
+          color="primary"
+          rounded="xl"
+          elevation="0"
+          append-icon="mdi-file-excel"
+          @click="handleExportCsv()"
+        >
+          <span class="text-none">Exporter</span>
+        </v-btn>
+      </a>
     </div>
     <v-card rounded="xl" elevation="0">
       <template #text>
@@ -209,6 +233,7 @@
 
 <script lang="ts" setup>
 import { usePenaltyStore } from '@/stores/penalty'
+import { useSnackbarStore } from '@/stores/snackbar'
 import { shouldHaveOneOfPermissions, userHasOneOfPermissions } from '@/utilities/auth.util'
 import { PenaltyI } from '~/types/penalty'
 
@@ -224,7 +249,9 @@ useAdminBreadcrumb('mdi-account-group', [{
 }])
 
 const penaltyStore = usePenaltyStore()
-const { fetchPenaltyWithPagination, deletePenalty } = penaltyStore
+const snackbarStore = useSnackbarStore()
+const { fetchPenaltyWithPagination, deletePenalty, exportPenalties } = penaltyStore
+const { showSuccessSnackbar } = snackbarStore
 
 const itemsPerPage = ref(10)
 const page = ref(1)
@@ -236,6 +263,9 @@ const penaltyFormDialogAction = ref<string | undefined>(undefined)
 const confirmDialogVisible = ref(false)
 const deletionInLoading = ref(false)
 const penaltiesLoading = ref(false)
+const filter = ref<Record<string, string | boolean | number>>({
+  success: true
+})
 
 const textConfirmDeletion = computed(
   () => `Voulez-vous vraiment supprimer cette pénalité <strong>"${selectedPenalty.value?.company}"</strong> ?`
@@ -310,13 +340,31 @@ function refreshPenalties () {
   })
 }
 
+function handleFilter () {
+  page.value = 1
+  refreshPenalties()
+}
+
 async function loadPenalties (payload: { page: number, itemsPerPage: number }) {
   penaltiesLoading.value = true
   const { data, total } = await fetchPenaltyWithPagination(
-    { page: payload.page, limit: payload.itemsPerPage }
+    {
+      page: payload.page,
+      limit: payload.itemsPerPage,
+      filter: { ...filter.value }
+    }
   )
   penalties.value = data
   totalItems.value = total
   penaltiesLoading.value = false
 }
+
+function handleExportCsv () {
+  showSuccessSnackbar('Le téléchargement du ficher a été lancé')
+}
+
+function handleExportPenalties () {
+  exportPenalties(filter.value)
+}
+
 </script>

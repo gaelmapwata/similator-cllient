@@ -23,20 +23,41 @@ export const usePenaltyStore = defineStore('penalty', {
         })
       })
     },
-    // eslint-disable-next-line max-len
-    fetchPenaltyWithPagination ({ page, limit }: { page: number, limit: number }): Promise<HttpPaginationResponseI<PenaltyI[]>> {
+
+    fetchPenaltyWithPagination ({ page, limit, filter }:
+      {
+        page: number,
+         limit: number,
+         filter?: { [key: string]: string | number | boolean }
+        }): Promise<HttpPaginationResponseI<PenaltyI[]>> {
       return new Promise((resolve) => {
         useFetchApi('/penalties', {
           method: 'get',
           params: {
             page,
-            limit
+            limit,
+            ...(filter || {})
           }
         }).then(({ data }) => {
           if (data.value) {
             resolve(data.value)
           }
         })
+      })
+    },
+    exportPenalties (filter?: {
+      [key: string]: string | number | boolean
+    }): void {
+      useFetchApi('/penalties/download-csv', {
+        method: 'get',
+        params: {
+          ...(filter || {})
+        }
+      }).then(({ data }) => {
+        if (data.value) {
+          const fileUrl = URL.createObjectURL(data.value)
+          window.open(fileUrl, '_blank')
+        }
       })
     },
     updatePenalty (payload: PenaltyI) {

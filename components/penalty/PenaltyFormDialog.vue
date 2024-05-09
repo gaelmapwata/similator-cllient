@@ -22,15 +22,12 @@
 import { object, string, number } from 'yup'
 import { Form } from 'vee-validate'
 import { useSnackbarStore } from '@/stores/snackbar'
-import { useUserStore } from '@/stores/user'
 import { usePenaltyStore } from '@/stores/penalty'
 // import { storeToRefs } from 'pinia'
 import { PenaltyI } from '~/types/penalty'
 
 const snackbarStore = useSnackbarStore()
 const penaltyStore = usePenaltyStore()
-const userStore = useUserStore()
-// const { loading: userLoading, users } = storeToRefs(userStore)
 
 const props = defineProps({
   modelValue: Boolean,
@@ -40,7 +37,6 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue', 'created', 'updated'])
 
 const { showErrorSnackbar } = snackbarStore
-// const { fetchUsers } = userStore
 const { updatePenalty, storePenalty } = penaltyStore
 
 const form = ref<typeof Form>()
