@@ -87,7 +87,7 @@
           <template #[`item.amountQuarter`]="{ item }">
             {{ item.amount/4 }}
           </template>
-          <template #[`item.amountSix`]="{ item }">
+          <template #[`item.amountHeigth`]="{ item }">
             {{ item.amount/8 }}
           </template>
         </v-data-table-server>
@@ -124,7 +124,7 @@
           <template #[`item.amountQuarter`]="{ item }">
             {{ (item.amount*75/100)/4 }}
           </template>
-          <template #[`item.amountSix`]="{ item }">
+          <template #[`item.amountHeigth`]="{ item }">
             {{ (item.amount*75/100)/6 }}
           </template>
           <template #[`item.amountPercent2`]="{ item }">
@@ -164,7 +164,7 @@
           <template #[`item.amountQuarter`]="{ item }">
             {{ (item.amount*65/100)/4 }}
           </template>
-          <template #[`item.amountSix`]="{ item }">
+          <template #[`item.amountHeigth`]="{ item }">
             {{ (item.amount*65/100)/8 }}
           </template>
         </v-data-table-server>
@@ -201,7 +201,7 @@
           <template #[`item.amountQuarter`]="{ item }">
             {{ (item.amount*55/100)/4 }}
           </template>
-          <template #[`item.amountSix`]="{ item }">
+          <template #[`item.amountHeigth`]="{ item }">
             {{ (item.amount*55/100)/8 }}
           </template>
         </v-data-table-server>
@@ -238,7 +238,7 @@
           <template #[`item.amountQuarter`]="{ item }">
             {{ (item.amount*45/100)/4 }}
           </template>
-          <template #[`item.amountSix`]="{ item }">
+          <template #[`item.amountHeigth`]="{ item }">
             {{ (item.amount*45/100)/8 }}
           </template>
         </v-data-table-server>
@@ -327,12 +327,8 @@ const headers = [
     key: 'amountQuarter'
   },
   {
-    title: 'amount/6',
-    key: 'amountSix'
-  },
-  {
-    title: 'amount/50%',
-    key: 'amountPercent2'
+    title: 'amount/8',
+    key: 'amountHeigth'
   },
   {
     title: 'Date enregistrement',
