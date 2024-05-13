@@ -88,10 +88,7 @@
             {{ item.amount/4 }}
           </template>
           <template #[`item.amountSix`]="{ item }">
-            {{ item.amount/6 }}
-          </template>
-          <template #[`item.amountPercent2`]="{ item }">
-            {{ (item.amount/6)*50/100 }}
+            {{ item.amount/8 }}
           </template>
         </v-data-table-server>
       </template>
@@ -137,7 +134,7 @@
       </template>
     </v-card>
     <h5 class="mt-3">
-      Tableau de 50%
+      Tableau de 65%
     </h5>
     <v-card rounded="xl" elevation="0">
       <template #text>
@@ -159,25 +156,22 @@
             {{ (itemsPerPage * (page - 1)) + index + 1 }}
           </template>
           <template #[`item.amount`]="{ item }">
-            {{ (item.amount*50/100) }}
+            {{ (item.amount*65/100) }}
           </template>
           <template #[`item.amountHalf`]="{ item }">
-            {{ (item.amount*50/100)/2 }}
+            {{ (item.amount*65/100)/2 }}
           </template>
           <template #[`item.amountQuarter`]="{ item }">
-            {{ (item.amount*50/100)/4 }}
+            {{ (item.amount*65/100)/4 }}
           </template>
           <template #[`item.amountSix`]="{ item }">
-            {{ (item.amount*50/100)/6 }}
-          </template>
-          <template #[`item.amountPercent2`]="{ item }">
-            {{ (item.amount*50/100)*50/100 }}
+            {{ (item.amount*65/100)/8 }}
           </template>
         </v-data-table-server>
       </template>
     </v-card>
     <h5 class="mt-3">
-      Tableau de 25%
+      Tableau de 55%
     </h5>
     <v-card rounded="xl" elevation="0">
       <template #text>
@@ -199,19 +193,53 @@
             {{ (itemsPerPage * (page - 1)) + index + 1 }}
           </template>
           <template #[`item.amount`]="{ item }">
-            {{ (item.amount*25/100) }}
+            {{ (item.amount*55/100) }}
           </template>
           <template #[`item.amountHalf`]="{ item }">
-            {{ (item.amount*25/100)/2 }}
+            {{ (item.amount*55/100)/2 }}
           </template>
           <template #[`item.amountQuarter`]="{ item }">
-            {{ (item.amount*25/100)/4 }}
+            {{ (item.amount*55/100)/4 }}
           </template>
           <template #[`item.amountSix`]="{ item }">
-            {{ (item.amount*25/100)/6 }}
+            {{ (item.amount*55/100)/8 }}
           </template>
-          <template #[`item.amountPercent2`]="{ item }">
-            {{ (item.amount*25/100)*50/100 }}
+        </v-data-table-server>
+      </template>
+    </v-card>
+    <h5 class="mt-3">
+      Tableau de 45%
+    </h5>
+    <v-card rounded="xl" elevation="0">
+      <template #text>
+        <v-data-table-server
+          v-model="selectedPenalties"
+          v-model:items-per-page="itemsPerPage"
+          v-model:page="page"
+          :items-length="totalItems"
+          :headers="(headers as any)"
+          :items="penalties"
+          :loading="penaltiesLoading"
+          items-per-page-text="Items par page"
+          item-value="id"
+          select-strategy="single"
+          return-object
+          @update:options="loadPenalties"
+        >
+          <template #[`item.index`]="{ index }">
+            {{ (itemsPerPage * (page - 1)) + index + 1 }}
+          </template>
+          <template #[`item.amount`]="{ item }">
+            {{ (item.amount*45/100) }}
+          </template>
+          <template #[`item.amountHalf`]="{ item }">
+            {{ (item.amount*45/100)/2 }}
+          </template>
+          <template #[`item.amountQuarter`]="{ item }">
+            {{ (item.amount*45/100)/4 }}
+          </template>
+          <template #[`item.amountSix`]="{ item }">
+            {{ (item.amount*45/100)/8 }}
           </template>
         </v-data-table-server>
       </template>
